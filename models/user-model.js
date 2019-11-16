@@ -5,6 +5,8 @@ const userSchema = new Schema(
   {
     username: String,
     password: String,
+    lat: Number,
+    lng: Number,
     userFriends: { type: [{ type: Schema.Types.ObjectId, ref: "User" }] },
   },
   {
