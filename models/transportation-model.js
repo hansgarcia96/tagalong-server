@@ -11,13 +11,14 @@ const transportationSchema = new Schema({
   year: {
     type: String
   },
-  images: {
-    type: [String]
+  imageUrl: {
+    type: String
   },
   seats: {
     type: Number
   },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
+  passengers: [{ type: Schema.Types.ObjectId, ref: "User" }]
 });
 
 const Transportation = mongoose.model("Transportation", transportationSchema);

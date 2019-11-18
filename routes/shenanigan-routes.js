@@ -7,14 +7,9 @@ const Transportation = require("../models/transportation-model");
 const Comment = require("../models/comment-model");
 
 // POST NEW EVENT
-router.post("/events", (req, res, next) => {
-  console.log("this is the req body info for the event ======= ", req.body);
-  console.log("the current user info >>>>>>> ", req.user);
-
+router.post("/events",  (req, res, next) => {
   const myEventBody = req.body;
   myEventBody.author = req.user._id;
-
-  console.log("this is the event info ---- ", myEventBody);
 
   Shenanigan.create(myEventBody)
     .then(response => {
@@ -29,9 +24,6 @@ router.post("/events", (req, res, next) => {
 //CREATE A COMMENT
 router.post("/comments", (req, res, next) => {
   const myCommentBody = req.body;
-  // myCommentBody.owner = req.user._id;
-
-  // HOW TO GET EVENT ID???
 
   Comment.create(myCommentBody)
     .then(response => {
@@ -68,7 +60,7 @@ router.get("/events/:id", (req, res, next) => {
     return;
   }
 
-  Shenanigan.findById(req.params.id)
+  Shenanigan.findById(req.params.id).populate('author', 'firstName lastName')
   .then(response => {
       console.log(response);
       res.status(200).json(response);

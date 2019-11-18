@@ -5,9 +5,12 @@ const userSchema = new Schema(
   {
     username: String,
     password: String,
+    firstName: String,
+    lastName: String,
     lat: Number,
     lng: Number,
-    userFriends: { type: [{ type: Schema.Types.ObjectId, ref: "User" }] },
+    imageUrl: { type: String },
+    userFriends: { type: [{ type: Schema.Types.ObjectId, ref: "User" }] }
   },
   {
     timestamps: true

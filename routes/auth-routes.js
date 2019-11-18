@@ -4,26 +4,27 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user-model");
 
+
 // ---------- SIGNUP ----------
 authRoutes.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
   const lat      = req.body.lat;
   const lng      = req.body.lng;
-
-  console.log(`The lat is ${lat}, and the lng is ${lng}`);
-  
-
+  const imageUrl = req.body.imageUrl;
+ 
   if (!username || !password) {
     res.status(400).json({ message: "Provide username and password" });
     return;
     12;
   }
 
-  if (password.length < 7) {
+  if (password.length < 3) {
     res.status(400).json({
       message:
-        "Please make your password at least 8 characters long for security purposes."
+        "Please make your password at least 3 characters long for security purposes."
     });
     return;
   }
@@ -45,8 +46,12 @@ authRoutes.post("/signup", (req, res, next) => {
     const aNewUser = new User({
       username: username,
       password: hashPass,
+      firstName: firstName,
+      lastName: lastName,
       lat     : lat,
-      lng     : lng
+      lng     : lng,
+      imageUrl: imageUrl,
+   
     });
 
     aNewUser.save(err => {
@@ -121,5 +126,7 @@ authRoutes.get("/loggedin", (req, res, next) => {
   }
   res.status(403).json({ message: "Unauthorized" });
 });
+
+
 
 module.exports = authRoutes;

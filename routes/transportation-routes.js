@@ -7,15 +7,9 @@ const Transportation = require('../models/transportation-model');
 
 // POST route => to create a new vehicle
 router.post('/vehicles', (req, res, next)=>{
+  const myVehicleBody = req.body;
  
-  Transportation.create({
-    vehicleType: req.body.vehicleType,
-    model: req.body.model,
-    year: req.body.year,
-    // images:
-    seats: req.body.seats,
-   
-  })
+  Transportation.create(myVehicleBody)
     .then(response => {
       res.json(response);
     })

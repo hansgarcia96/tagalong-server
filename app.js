@@ -16,7 +16,7 @@ const passport = require("passport");
 // IF YOU STILL DIDN'T, GO TO 'configs/passport.js' AND UN-COMMENT OUT THE WHOLE FILE
 
 mongoose
-  .connect("mongodb://localhost/Official-EventPool-Server", {
+  .connect("mongodb://localhost/Tag-Along-Server", {
     useNewUrlParser: true
   })
   .then(x => {
@@ -34,6 +34,7 @@ const debug = require("debug")(
 );
 
 const app = express();
+
 
 // Middleware Setup
 app.use(logger("dev"));
@@ -80,7 +81,7 @@ app.use((req, res, next) => {
 });
 
 // default value for title local
-app.locals.title = "EventPool";
+app.locals.title = "Tag Along";
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 app.use(
@@ -99,5 +100,6 @@ const index = require("./routes/index");
 app.use("/", index);
 app.use("/api", require("./routes/shenanigan-routes"));
 app.use("/api", require("./routes/transportation-routes"));
+app.use('/api', require('./routes/file-upload-routes'));
 
 module.exports = app;

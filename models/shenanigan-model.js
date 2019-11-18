@@ -30,7 +30,7 @@ const shenaniganSchema = new Schema(
     lng: {
       type: Number
     },
-    image: {
+    imageUrl: {
       type: String
     },
     members: [{ type: Schema.Types.ObjectId, ref: "User" }],
