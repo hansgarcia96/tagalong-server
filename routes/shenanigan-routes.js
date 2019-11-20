@@ -21,6 +21,40 @@ router.post("/events",  (req, res, next) => {
     });
 });
 
+
+
+
+
+// POST TRANSPORTATION TO EVENT
+router.post("/addVehicle/:eventsId", (req, res, next) => {
+    const newVehicle = new Transportation(req.body);
+    console.log(req.body);
+    // res.json(req.body)
+    let message = "working"
+    res.json(message)
+    // newVehicle.owner = req.user._id;
+    newVehicle.save()
+    .then(newVehicle => {
+      console.log("New vehicle added to the Event", newVehicle);
+      Shenanigan.findById(req.params.eventsId)
+      .then(eventFromDb => {
+        console.log("the event from DB when adding new vehicle ------------------", eventFromDb);
+        eventFromDb.transportation.push(newVehicle._id);
+        eventFromDb.save()
+        .then(updatedEvent => {
+          console.log("the update event with the new vehicle ------------", updatedEvent);
+          // RES REDIRECT BACK ????
+        })
+      })
+    })
+})  
+
+
+
+
+
+
+
 //CREATE A COMMENT
 router.post("/comments", (req, res, next) => {
   const myCommentBody = req.body;
