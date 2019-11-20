@@ -8,9 +8,11 @@ const shenaniganSchema = new Schema(
       required: true,
       minlength: 2
     },
-    date: {
-      type: Date
-      // required: true
+    startDate: {
+      type: Date,
+    },
+    endDate: {
+      type: Date,
     },
     description: {
       type: String,
@@ -18,11 +20,6 @@ const shenaniganSchema = new Schema(
     },
     category: {
       type: String,
-      required: true
-    },
-    location: {
-      type: String,
-      required: true
     },
     lat: {
       type: Number
