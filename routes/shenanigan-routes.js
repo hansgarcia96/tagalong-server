@@ -9,6 +9,7 @@ const Comment = require("../models/comment-model");
 // POST NEW EVENT
 router.post("/events",  (req, res, next) => {
   const myEventBody = req.body;
+  console.log(`shenanigan router post ${myEventBody}`)
   myEventBody.author = req.user._id;
 
   Shenanigan.create(myEventBody)
@@ -21,6 +22,16 @@ router.post("/events",  (req, res, next) => {
     });
 });
 
+
+
+router.post('/events', (req, res,_) =>{
+  Shenanigan.create({
+    name : req.body.name
+
+
+    
+  })
+})
 
 
 
