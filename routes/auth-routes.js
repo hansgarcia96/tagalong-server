@@ -106,6 +106,7 @@ authRoutes.post("/login", (req, res, next) => {
       console.log("this is the user on log in ++++++++++++++ ", theUser);
       req.session.theUser = "wow wow wow wow wow";
       res.status(200).json(theUser);
+      res.redirect('/dashboard');
     });
   })(req, res, next);
 });
